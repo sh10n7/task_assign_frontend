@@ -7,13 +7,11 @@
     <textarea type="text" id="content" placeholder="content" v-model="task.content"></textarea>
     <label for="assignee">対応者</label>
     <select v-model="task.assigneeId" id="assignee">
-      <option value="0">user0</option>
-      <option value="1">user1</option>
-      <option value="2">user2</option>
+      <option v-for="user in users" :key="user.id" :value="user.uid" >{{ user.displayName }}</option>
     </select>
     <button @click.prevent="addTask">保存</button>
   </form>
-  <TaskList :tasks="tasks"/>
+  <TaskList :tasks="tasks" :users="users"/>
 </template>
 
 <script>
@@ -38,14 +36,21 @@ export default {
       assigneeId: ''
     })
     const tasks = ref([]);
+    const users = ref([]);
 
     onMounted(async() => {
       try {
-        const response = await apiClient.get('tasks');
-        console.log(response)
-        tasks.value = response.data;
+        const fetchTasks = await apiClient.get('/tasks');
+        tasks.value = fetchTasks.data;
       }catch(error) {
-        console.log("データの取得ができませんでした", error);
+        console.log("タスクデータの取得ができませんでした", error);
+      }
+
+      try {
+        const fetchUsers = await apiClient.get('/users');
+        users.value = fetchUsers.data;
+      }catch(error) {
+        console.log("ユーザーデータの取得ができませんでした", error);
       }
     })
 
@@ -70,7 +75,7 @@ export default {
       }
     }
 
-    return { displayName, task, tasks, handleSignOut, addTask }
+    return { displayName, task, tasks, users, handleSignOut, addTask }
   }
 }
 </script>
