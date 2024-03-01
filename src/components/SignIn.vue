@@ -5,7 +5,7 @@
     <input type="password" id="password" placeholder="password">
     <button>ログイン</button>
   </form>
-  <p>アカウント作成がお済みでない場合は、こちら</p>
+  <p>アカウント作成がお済みでない場合は、<router-link to="/signup">こちら</router-link></p>
 </template>
 
 <script>

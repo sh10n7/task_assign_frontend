@@ -6,7 +6,7 @@
     <input type="text" id="nickname" placeholder="nickname">
     <button value="新規登録">新規登録</button>
   </form>
-  <p>既にアカウントをお持ちの方はこちらへ</p>
+  <p>既にアカウントをお持ちの方は<router-link to="/">こちら</router-link>へ</p>
 </template>
 <script>
 
