@@ -4,7 +4,7 @@
     <input type="text" id="email" placeholder="email" v-model="email">
     <input type="password" id="password" placeholder="password" v-model="password">
     <input type="text" id="nickname" placeholder="nickname" v-model="nickname">
-    <button value="新規登録" @click.prevent="handleSignUp">新規登録</button>
+    <button @click.prevent="handleSignUp">新規登録</button>
   </form>
   <p>既にアカウントをお持ちの方は<router-link to="/">こちら</router-link>へ</p>
 </template>
